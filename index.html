@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <title>picker demo</title>
+    <link href="./picker.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <p onclick="picker()">
+            点击选择
+        </p>
+        <div class="text">
+            您选择的为：
+            <input type="text" id="nowValue" value="河北省 衡水市"></input>
+        </div>
+    </div>
+
+
+    <script src="./city.js"></script>
+    <script src="./picker.js"></script>
+    <script>
+        // 选择器
+        function picker() {
+            var nowValue = document.getElementById('nowValue');
+            new Picker({
+                "defaultValue": nowValue.value,//获取在页面设置的默认值（格式："val1 val2"）
+                "type": 3,//需要联动级数[1、2、3]（可选）
+                "data": cityData,//数据(必传)
+                "keys": {
+                    "id": "Code",
+                    "value": "Name",
+                    "childData": "level"//最多3级联动
+                },//数组内的键名称(必传，id、text、data)
+                "callBack": function (val) {
+                    //回调函数（val为选择的值）
+                    nowValue.value = val;
+                }
+            });
+        };
+    </script>
+</body>
+</html>
